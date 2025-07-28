@@ -22,9 +22,19 @@ class Quiz {
     }
   }
 
-  // should shuffle the items in the questions array.
+  checkAnswer(answer) {
+    let currentQuestion = this.questions[this.currentQuestionIndex];
+    let correctAnswerOfCurrentQuestion = currentQuestion.answer;
+    
+    if (correctAnswerOfCurrentQuestion === answer) {
+      this.correctAnswers++;
+    }
+  }
 
-  // 5. checkAnswer(answer)
+
+  // Checks if the passed answer is correct for the current question and increments correctAnswers by 1 if the answer is correct.
+  // should receive 1 argument (answer - string).
+// should increase correctAnswers by 1 when called with a correct answer for the current question
 
   // 6. hasEnded()
 }
