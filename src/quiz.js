@@ -8,13 +8,12 @@ class Quiz {
   }
 
   getQuestion() {
-   
-    return this.questions[this.currentQuestionIndex]
+    return this.questions[this.currentQuestionIndex];
   }
 
-    //should return the item from the questions array at the position of currentQuestionIndex.
-
-  // 3. moveToNextQuestion()
+  moveToNextQuestion() {
+    this.currentQuestionIndex++;
+  }
 
   // 4. shuffleQuestions()
 
