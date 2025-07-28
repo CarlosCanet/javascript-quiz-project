@@ -31,10 +31,12 @@ class Quiz {
     }
   }
 
-
-  // Checks if the passed answer is correct for the current question and increments correctAnswers by 1 if the answer is correct.
-  // should receive 1 argument (answer - string).
-// should increase correctAnswers by 1 when called with a correct answer for the current question
-
-  // 6. hasEnded()
+  hasEnded() {
+    if (this.currentQuestionIndex < this.questions.length) {
+      return false;
+    } else {  // this.currentQuestionIndex >= this.questions.length
+      return true;
+    }
+    // return (this.currentQuestionIndex >= this.questions.length);
+  }
 }
