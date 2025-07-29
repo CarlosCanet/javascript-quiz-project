@@ -54,16 +54,42 @@ class Quiz {
       this.questions = diffQuestions;
     }
   }
+
+  averageDifficulty(){
+    console.log(this.questions)
+    const sumDifficulty = this.questions.reduce((acc, element) => {
+
+      return acc + element.difficulty
+
+    },0);
+    let avg = sumDifficulty / this.questions.length
+
+ console.log(sumDifficulty)   
+    return avg
+
+  }
+
+
 }
 
-/*In the src/Quiz.js file, implement the filterQuestionsByDifficulty() method.
 
-You should use the filter() method to filter the questions array by the difficulty level.
 
-filterQuestionsByDifficulty(difficulty) method:
-Filters the questions array by the difficulty level passed as an argument.
+/*Implement method averageDifficulty():
+
+See Instructions
+
+In the src/Quiz.js file, implement the averageDifficulty() method.
+
+You should use the reduce() method to sum the difficulty of all the questions and then divide the sum by the number of questions to get the average difficulty.
+
+averageDifficulty() method:
+
 should be defined.
+
 should be a function.
-should receive 1 argument (difficulty - a number between 1 and 3).
-should update the questions array property to contain only the questions with the specified difficulty.
-should not change the questions array if the difficulty argument is not a number between 1 and 3.*/
+
+should receive no arguments.
+
+should return the average difficulty (number) of the questions in the quiz*/
+
+
