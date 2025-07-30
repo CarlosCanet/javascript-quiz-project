@@ -1,6 +1,6 @@
 class Quiz {
   constructor(questions, timeLimit, timeRemaining) {
-    this.questions = questions;
+    this.questions = questions.slice(0);
     this.timeLimit = timeLimit;
     this.timeRemaining = timeRemaining;
     this.correctAnswers = 0;
@@ -72,24 +72,5 @@ class Quiz {
 
 }
 
-
-
-/*Implement method averageDifficulty():
-
-See Instructions
-
-In the src/Quiz.js file, implement the averageDifficulty() method.
-
-You should use the reduce() method to sum the difficulty of all the questions and then divide the sum by the number of questions to get the average difficulty.
-
-averageDifficulty() method:
-
-should be defined.
-
-should be a function.
-
-should receive no arguments.
-
-should return the average difficulty (number) of the questions in the quiz*/
 
 
