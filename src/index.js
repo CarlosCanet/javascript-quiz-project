@@ -110,14 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Update the green progress bar
     // Update the green progress bar (div#progressBar) width so that it shows the percentage of questions answered
     let progressPercentage =
-      (quiz.currentQuestionIndex / questions.length) * 100;
+      (quiz.currentQuestionIndex / this.questions.length) * 100;
     progressBar.style.width = `${progressPercentage}%`; // This value is hardcoded as a placeholder
 
     // 3. Update the question count text
     // Update the question count (div#questionCount) show the current question out of total questions
 
     questionCount.innerText = `Question ${quiz.currentQuestionIndex + 1} of ${
-      questions.length
+      this.questions.length
     }`; //  This value is hardcoded as a placeholder
 
     // 4. Create and display new radio input element with a label for each choice.
