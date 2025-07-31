@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const quiz = new Quiz(questions, quizDuration, quizDuration);
   // Shuffle the quiz questions
   quiz.shuffleQuestions();
-  questions.splice(0, 4);
-  console.log(questions);
+  
+ 
   /************  SHOW INITIAL CONTENT  ************/
 
   // Convert the time remaining in seconds to minutes and seconds, and pad the numbers with zeros if needed
@@ -110,14 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. Update the green progress bar
     // Update the green progress bar (div#progressBar) width so that it shows the percentage of questions answered
     let progressPercentage =
-      (quiz.currentQuestionIndex / this.questions.length) * 100;
+      (quiz.currentQuestionIndex / quiz.questions.length) * 100;
     progressBar.style.width = `${progressPercentage}%`; // This value is hardcoded as a placeholder
 
     // 3. Update the question count text
     // Update the question count (div#questionCount) show the current question out of total questions
 
     questionCount.innerText = `Question ${quiz.currentQuestionIndex + 1} of ${
-      this.questions.length
+      quiz.questions.length
     }`; //  This value is hardcoded as a placeholder
 
     // 4. Create and display new radio input element with a label for each choice.
@@ -162,7 +162,24 @@ document.addEventListener("DOMContentLoaded", () => {
     //
     // 1. Get all the choice elements. You can use the `document.querySelectorAll()` method.
 
+    let choiceElementsNodeList = document.querySelectorAll("#choices input") 
     // 2. Loop through all the choice elements and check which one is selected
+    choiceElementsNodeList.forEach((eachChoice) => {
+      if (eachChoice.checked){
+
+        selectedAnswer = eachChoice.value
+      }
+    })
+
+    if (selectedAnswer) {
+      quiz.checkAnswer(selectedAnswer)
+      quiz.moveToNextQuestion()
+      showQuestion()
+    }
+
+
+    
+
     // Hint: Radio input elements have a property `.checked` (e.g., `element.checked`).
     //  When a radio input gets selected the `.checked` property will be set to true.
     //  You can use check which choice was selected by checking if the `.checked` property is true.
@@ -171,6 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if selected answer is correct by calling the quiz method `checkAnswer()` with the selected answer.
     // Move to the next question by calling the quiz method `moveToNextQuestion()`.
     // Show the next question by calling the function `showQuestion()`.
+
   }
 
   function showResults() {
