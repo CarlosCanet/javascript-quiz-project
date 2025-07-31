@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showResults();
       return;
     }
-
+console.log("anything")
     // Clear the previous question text and question choices
     questionContainer.innerText = "";
     choiceContainer.innerHTML = "";
@@ -204,3 +204,17 @@ document.addEventListener("DOMContentLoaded", () => {
     resultContainer.innerText = `You scored ${quiz.correctAnswers} out of ${quiz.questions.length} correct answers!`; // This value is hardcoded as a placeholder
   }
 });
+
+const restartBtn = document.querySelector("#restartButton")
+restartBtn.addEventListener("click", () => { 
+  endView.style.display = "none";
+  quizView.style.display = "flex";
+console.log(quiz)
+  quiz.currentQuestionIndex = 0;
+  quiz.correctAnswers = 0;
+
+  quiz.shuffleQuestions()
+
+  showQuestion()
+
+})
