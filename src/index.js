@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ),
     // Add more questions here
   ];
-  const quizDuration = 120; // 120 seconds (2 minutes)
+  const quizDuration = 20; // 120 seconds (2 minutes)
 
   /************  QUIZ INSTANCE  ************/
 
@@ -53,26 +53,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const quiz = new Quiz(questions, quizDuration, quizDuration);
   // Shuffle the quiz questions
   quiz.shuffleQuestions();
-  
- 
-  /************  SHOW INITIAL CONTENT  ************/
 
+  /************  SHOW INITIAL CONTENT  ************/
+  function secondsToStrings(timeInseconds) {
+    const minutes = Math.floor(timeInseconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = (timeInseconds % 60).toString().padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  }
   // Convert the time remaining in seconds to minutes and seconds, and pad the numbers with zeros if needed
-  const minutes = Math.floor(quiz.timeRemaining / 60)
-    .toString()
-    .padStart(2, "0");
-  const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
 
   // Display the time remaining in the time remaining container
   const timeRemainingContainer = document.getElementById("timeRemaining");
-  timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+  timeRemainingContainer.innerText = secondsToStrings(quiz.timeRemaining);
 
   // Show first question
   showQuestion();
 
   /************  TIMER  ************/
 
-  let timer;
+  let timer = setInterval(() => {
+    quiz.timeRemaining--;
+    timeRemainingContainer.innerText = secondsToStrings(quiz.timeRemaining);
+    if (quiz.timeRemaining === 0) {
+      clearInterval(timer);
+      showResults();
+    }
+  }, 1000);
 
   /************  EVENT LISTENERS  ************/
 
@@ -90,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       showResults();
       return;
     }
-console.log("anything")
+
     // Clear the previous question text and question choices
     questionContainer.innerText = "";
     choiceContainer.innerHTML = "";
@@ -162,23 +170,19 @@ console.log("anything")
     //
     // 1. Get all the choice elements. You can use the `document.querySelectorAll()` method.
 
-    let choiceElementsNodeList = document.querySelectorAll("#choices input") 
+    let choiceElementsNodeList = document.querySelectorAll("#choices input");
     // 2. Loop through all the choice elements and check which one is selected
     choiceElementsNodeList.forEach((eachChoice) => {
-      if (eachChoice.checked){
-
-        selectedAnswer = eachChoice.value
+      if (eachChoice.checked) {
+        selectedAnswer = eachChoice.value;
       }
-    })
+    });
 
     if (selectedAnswer) {
-      quiz.checkAnswer(selectedAnswer)
-      quiz.moveToNextQuestion()
-      showQuestion()
+      quiz.checkAnswer(selectedAnswer);
+      quiz.moveToNextQuestion();
+      showQuestion();
     }
-
-
-
 
     // Hint: Radio input elements have a property `.checked` (e.g., `element.checked`).
     //  When a radio input gets selected the `.checked` property will be set to true.
@@ -188,33 +192,50 @@ console.log("anything")
     // Check if selected answer is correct by calling the quiz method `checkAnswer()` with the selected answer.
     // Move to the next question by calling the quiz method `moveToNextQuestion()`.
     // Show the next question by calling the function `showQuestion()`.
-
   }
-
-  function showResults() {
-    // YOUR CODE HERE:
-    //
+  function showEndView() {
     // 1. Hide the quiz view (div#quizView)
     quizView.style.display = "none";
 
     // 2. Show the end view (div#endView)
     endView.style.display = "flex";
+  }
+  function showQuizView() {
+    endView.style.display = "none";
+    quizView.style.display = "flex";
+  }
+
+  function showResults() {
+    // YOUR CODE HERE:
+    //
+    showEndView();
+
+    clearInterval(timer);
 
     // 3. Update the result container (div#result) inner text to show the number of correct answers out of total questions
     resultContainer.innerText = `You scored ${quiz.correctAnswers} out of ${quiz.questions.length} correct answers!`; // This value is hardcoded as a placeholder
   }
+
+  const restartBtn = document.querySelector("#restartButton");
+  restartBtn.addEventListener("click", () => {
+    showQuizView();
+    quiz.currentQuestionIndex = 0;
+    quiz.correctAnswers = 0;
+
+    quiz.shuffleQuestions();
+
+    showQuestion();
+
+    quiz.timeRemaining = quiz.timeLimit;
+    timeRemainingContainer.innerText = secondsToStrings(quiz.timeRemaining);
+
+    timer = setInterval(() => {
+      quiz.timeRemaining--;
+      timeRemainingContainer.innerText = secondsToStrings(quiz.timeRemaining);
+      if (quiz.timeRemaining === 0) {
+        clearInterval(timer);
+        showResults();
+      }
+    }, 1000);
+  });
 });
-
-const restartBtn = document.querySelector("#restartButton")
-restartBtn.addEventListener("click", () => { 
-  endView.style.display = "none";
-  quizView.style.display = "flex";
-console.log(quiz)
-  quiz.currentQuestionIndex = 0;
-  quiz.correctAnswers = 0;
-
-  quiz.shuffleQuestions()
-
-  showQuestion()
-
-})
