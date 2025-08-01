@@ -28,12 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
         new Question("What is the only fruit that has its seeds on the outside?", ["Strawberry", "Apple", "Banana", "Cherry"], "Strawberry", 1),
         new Question("What color is the Black Panther?", ["Black", "White", "Pink", "Blue"], "Black", 1),
         new Question("What’s heavier: 1 kilogram of feathers or 1 kilogram of bricks?", ["Feathers", "Bricks", "They weigh the same", "Depends on the size"], "They weigh the same", 1),
-        new Question(" I’m so fragile that if you say my name, you’ll break me. What am I?", ["Glass", "Silence", "Me", "A word"], "Silence", 1),
+        new Question("I’m so fragile that if you say my name, you’ll break me. What am I?", ["Glass", "Silence", "Me", "A word"], "Silence", 1),
         new Question("What two words, when combined, hold the most letters?", ["Post Office", "Post pre", "My Office", "Nothing"], "Post Office", 1),
         new Question("What word is spelled incorrectly in every single dictionary?", ["Incorrectly", "None", "Almost none", "Every word"], "Incorrectly", 1),
-        new Question("What's the meaning of the word 'Guarrito' in Málaga?", ["Small person that doesn't shower", "Normal person that doesn't shower", "A bird", "A electric drill"], "A electric drill", 3),
-        new Question("In binary what is 2 + 2?", ["4", "22", "010", "1000"], "1000", 2),
-        new Question("Why does Mario break blocks with his head?", ["Gym memberships are expensive", "He’s too short to punch them", "Italian plumbers do things differently", "The blocks insulted his mustache"], "Gym memberships are expensive", 1),
+        new Question("What's the meaning of the word 'Guarrito' in Málaga?", ["Small person that doesn't shower", "Normal person that doesn't shower", "A bird", "An electric drill"], "A electric drill", 3),
+        new Question("In binary what is 2 + 2?", ["4", "22", "010", "0100"], "0100", 2),
+        new Question("Which Doctor's companion was the first in saying 'It's smaller on the outside', instead of the classical 'It's bigger on the inside'?", ["Clara Oswald", "Rose Tyler", "That seems sexual, and I don't watch porn?¿?", "Donna Noble"], "Clara Oswald", 2),
     ];
     const quizDuration = 20; // 120 seconds (2 minutes)
 
